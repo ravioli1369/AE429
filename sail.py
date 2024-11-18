@@ -80,7 +80,7 @@ altitudes = altitudes[:-1]
 altitudes.append(0)
 altitudes = np.array(altitudes) / 1000
 
-fig, ax = plt.subplots(1, 2, dpi=200)
+fig, ax = plt.subplots(1, 2, dpi=200, figsize=(10, 5))
 
 ax[0].plot(t, altitudes)
 ax[0].set_xlabel("Time (days)")
@@ -90,6 +90,11 @@ ax[1].plot(t, total_force)
 ax[1].set_yscale("log")
 ax[1].set_xlabel("Time (days)")
 ax[1].set_ylabel("Total Force (N)")
+
+# find altitude closest to 100 km
+
+idx = np.argmin(np.abs(altitudes - 100))
+print(f"Force at 100 km: {total_force[idx]:.2e} N")
 
 fig.tight_layout()
 fig.savefig("sail.png")
